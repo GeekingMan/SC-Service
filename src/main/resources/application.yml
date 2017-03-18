@@ -1,0 +1,56 @@
+spring:
+  datasource:
+    dbcp2:
+      max-total: 50
+      max-idle: 10
+      min-idle: 5
+      max-wait-millis: 10000
+      test-on-borrow: false
+      test-on-return: false
+      test-while-idle: false
+      time-between-eviction-runs-millis: 5000
+    continue-on-error: false
+    initialize: true
+    name: dbcp1
+    url: jdbc:mysql://${SC-Service_DB:localhost:3306}/lookup_portal?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=CTT 
+    username: ${SC-Service_DB:porta}
+    password: ${SC-Service_DB:porta}
+#  cloud:
+#    stream:
+#      rabbit:
+#        bindings:
+#          singleQueryInput:
+#            consumer:
+#              requeueRejected: false
+#      bindings:
+#        singleQueryInput:
+#          consumer:
+#            concurrency : 9
+#            maxAttempts: 1
+#          group: singleInvoiceQuery
+#          destination: lookup-singleInvoice
+#          contentType: application/x-java-object;type=com.baiwangmaoyi.common.queue.message.lookup.InvoiceLookupRequest
+#  redis:
+#    host: ${REDIS_ADDRESS:localhost}
+#    password: ${REDIS_PWD:}
+#    port: ${REDIS_PORT:6379}
+#    enable-cache: true
+#    database: 0
+#    pool:
+#      max-idle: 30
+#      min-idle: 20
+#      max-active: 50
+#      max-wait: 2000
+#    expiration:
+#      CacheName: 10000
+
+
+flyway:
+  base-line-on-migrate: true
+  table: flyway_version
+  base-line-version: 1
+  skip-default-resolvers: false
+  locations: classpath:db.migrations
+  is-enable-flyway-migration: true
+  out-of-order: false
+  repair: false
