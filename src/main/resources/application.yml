@@ -12,24 +12,30 @@ spring:
     continue-on-error: false
     initialize: true
     name: dbcp1
-    url: jdbc:mysql://${SC-Service_DB:localhost:3306}/lookup_portal?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=CTT 
-    username: ${SC-Service_DB:porta}
-    password: ${SC-Service_DB:porta}
-#  cloud:
-#    stream:
+    url: jdbc:mysql://${SC-Service_DB:localhost:3306}/sc_service?zeroDateTimeBehavior=convertToNull&useUnicode=true&characterEncoding=utf-8&useLegacyDatetimeCode=false&serverTimezone=CTT 
+    username: ${SC-Service_DB:root}
+    password: ${SC-Service_DB:root}
+  cloud:
+    stream:
 #      rabbit:
 #        bindings:
 #          singleQueryInput:
 #            consumer:
 #              requeueRejected: false
-#      bindings:
-#        singleQueryInput:
-#          consumer:
-#            concurrency : 9
-#            maxAttempts: 1
-#          group: singleInvoiceQuery
-#          destination: lookup-singleInvoice
-#          contentType: application/x-java-object;type=com.baiwangmaoyi.common.queue.message.lookup.InvoiceLookupRequest
+      bindings:
+        inputChannel:
+          consumer:
+            concurrency : 1
+            maxAttempts: 1
+#            routing: true
+          group: test
+          destination: sc-service
+          contentType: application/x-java-object;type=java.lang.String
+        outputChannel:
+#          producer:
+#            partitionKeyExpression: headers
+          destination: sc-service
+          contentType: application/json;type=java.lang.String
 #  redis:
 #    host: ${REDIS_ADDRESS:localhost}
 #    password: ${REDIS_PWD:}

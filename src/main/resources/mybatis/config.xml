@@ -5,14 +5,14 @@
 <configuration>
     <typeAliases>
         <typeAlias alias="UUID" type="java.util.UUID"/>
-        <typeAlias alias="UUIDTypeHandler" type="com.baiwangmaoyi.common.mybatis.UuidTypeHandler"/>
+        <typeAlias alias="UUIDTypeHandler" type="com.geek.sc.mybatis.UuidTypeHandler"/>
         <typeAlias alias="EnumTypeHandler" type="org.apache.ibatis.type.EnumTypeHandler"/>
         <package name="com.geek.sc.entity"/>
     </typeAliases>
     <typeHandlers>
-        <typeHandler handler="com.baiwangmaoyi.common.mybatis.UuidTypeHandler"/>
+        <typeHandler handler="com.geek.sc.mybatis.UuidTypeHandler"/>
     </typeHandlers>
     <plugins>
-        <plugin interceptor="com.baiwangmaoyi.common.mybatis.TimestampInterceptor"/>
+        <plugin interceptor="com.geek.sc.mybatis.TimestampInterceptor"/>
     </plugins>
 </configuration>
