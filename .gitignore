@@ -17,3 +17,5 @@ target/
 auditlog/
 .idea/
 tmp.*
+
+target/classes/
