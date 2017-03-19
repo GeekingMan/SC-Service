@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.geek.sc.dao.mapper.EventDataSyncMapper" >
+  <resultMap id="BaseResultMap" type="com.geek.sc.entity.EventDataSync" >
+    <id column="event_id" property="eventId" jdbcType="VARCHAR" typeHandler="UUIDTypeHandler" />
+    <result column="event_type" property="eventType" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" typeHandler="UUIDTypeHandler" />
+    <result column="source_service" property="sourceService" jdbcType="VARCHAR" />
+    <result column="destination_service" property="destinationService" jdbcType="VARCHAR" />
+    <result column="feature_key" property="featureKey" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="accept_status" property="acceptStatus" jdbcType="VARCHAR" />
+    <result column="process_status" property="processStatus" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    event_id, event_type, user_id, source_service, destination_service, feature_key, 
+    content, accept_status, process_status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.util.UUID" >
+    select 
+    <include refid="Base_Column_List" />
+    from event_data_sync
+    where event_id = #{eventId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.util.UUID" >
+    delete from event_data_sync
+    where event_id = #{eventId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler}
+  </delete>
+  <insert id="insert" parameterType="com.geek.sc.entity.EventDataSync" >
+    insert into event_data_sync (event_id, event_type, 
+      user_id, source_service, 
+      destination_service, feature_key, content, 
+      accept_status, process_status, create_time, 
+      update_time)
+    values (#{eventId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler}, #{eventType,jdbcType=VARCHAR}, 
+      #{userId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler}, #{sourceService,jdbcType=VARCHAR}, 
+      #{destinationService,jdbcType=VARCHAR}, #{featureKey,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{acceptStatus,jdbcType=VARCHAR}, #{processStatus,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.geek.sc.entity.EventDataSync" >
+    insert into event_data_sync
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        event_id,
+      </if>
+      <if test="eventType != null" >
+        event_type,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="sourceService != null" >
+        source_service,
+      </if>
+      <if test="destinationService != null" >
+        destination_service,
+      </if>
+      <if test="featureKey != null" >
+        feature_key,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+      <if test="acceptStatus != null" >
+        accept_status,
+      </if>
+      <if test="processStatus != null" >
+        process_status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="eventId != null" >
+        #{eventId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler},
+      </if>
+      <if test="eventType != null" >
+        #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler},
+      </if>
+      <if test="sourceService != null" >
+        #{sourceService,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationService != null" >
+        #{destinationService,jdbcType=VARCHAR},
+      </if>
+      <if test="featureKey != null" >
+        #{featureKey,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptStatus != null" >
+        #{acceptStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="processStatus != null" >
+        #{processStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.geek.sc.entity.EventDataSync" >
+    update event_data_sync
+    <set >
+      <if test="eventType != null" >
+        event_type = #{eventType,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler},
+      </if>
+      <if test="sourceService != null" >
+        source_service = #{sourceService,jdbcType=VARCHAR},
+      </if>
+      <if test="destinationService != null" >
+        destination_service = #{destinationService,jdbcType=VARCHAR},
+      </if>
+      <if test="featureKey != null" >
+        feature_key = #{featureKey,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="acceptStatus != null" >
+        accept_status = #{acceptStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="processStatus != null" >
+        process_status = #{processStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where event_id = #{eventId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.geek.sc.entity.EventDataSync" >
+    update event_data_sync
+    set event_type = #{eventType,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler},
+      source_service = #{sourceService,jdbcType=VARCHAR},
+      destination_service = #{destinationService,jdbcType=VARCHAR},
+      feature_key = #{featureKey,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      accept_status = #{acceptStatus,jdbcType=VARCHAR},
+      process_status = #{processStatus,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where event_id = #{eventId,jdbcType=VARCHAR,typeHandler=UUIDTypeHandler}
+  </update>
+</mapper>
